@@ -45,6 +45,9 @@ do
 	echo "version: ${PKGVER}" >> ${chartpath}.new
 	mv ${chartpath}.new ${chartpath}
 
+	# Populate charts dir if needed
+	helm dep build $pkgname
+
 	helm package $pkgname
 	helm gcs push ./${pkgname}-${PKGVER}.tgz $REPONAME
 done
