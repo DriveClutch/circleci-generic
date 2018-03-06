@@ -40,11 +40,8 @@ PKGVER="${DT}"
 for chartpath in */Chart.yaml
 do
 	pkgname=$(basename $(dirname $chartpath))
-	grep -Ev "^appVersion:" ${chartpath} > ${chartpath}.new
-	echo "appVersion: ${GITHASHLONG}" >> ${chartpath}.new
-	mv ${chartpath}.new ${chartpath}
 
-	# Update chart deps, set the chart version, (soon appVersion will be set here too)
-	helm package --dependency-update --version=$PKGVER $pkgname
+	# Update chart deps, set the chart and app version
+	helm package --dependency-update --version=$PKGVER --app-version=$GITHASHLONG $pkgname
 	helm gcs push ./${pkgname}-${PKGVER}.tgz $REPONAME
 done

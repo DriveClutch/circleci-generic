@@ -17,8 +17,8 @@ RUN apt-get update \
     && mv /tmp/docker/* /usr/bin \
     && rm -rf /tmp/docker /tmp/docker.tgz \
     && pip install --upgrade awscli \
-	&& curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.7.2-linux-amd64.tar.gz \
-	  && tar -xzvf helm-v2.7.2-linux-amd64.tar.gz \
+	&& curl -LO https://kubernetes-helm.storage.googleapis.com/helm-v2.8.1-linux-amd64.tar.gz \
+	  && tar -xzvf helm-v2.8.1-linux-amd64.tar.gz \
 	  && mv linux-amd64/helm /usr/bin/helm \
 	  && helm init --client-only \
 	  && helm plugin install https://github.com/nouney/helm-gcs \
