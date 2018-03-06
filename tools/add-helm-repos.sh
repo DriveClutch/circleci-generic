@@ -11,5 +11,5 @@ gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
 
 for i in $(gsutil ls ${HELM_GS_BUCKET} | awk -F'/' '{ print $4 }')
 do
-	helm repo add ${i} ${HELM_GS_BUCKET}$i
+	helm repo add ${i} ${HELM_GS_BUCKET}/$i
 done
