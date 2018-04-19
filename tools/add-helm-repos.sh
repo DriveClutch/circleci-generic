@@ -13,3 +13,6 @@ for i in $(gsutil ls ${HELM_GS_BUCKET} | awk -F'/' '{ print $4 }')
 do
 	helm repo add ${i} ${HELM_GS_BUCKET}/$i
 done
+
+# Manually add coreos-charts for helm-infra-umbrellas
+helm repo add coreos https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/
