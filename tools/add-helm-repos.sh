@@ -16,3 +16,4 @@ done
 
 # Manually add coreos-charts for helm-infra-umbrellas
 helm repo add coreos https://s3-eu-west-1.amazonaws.com/coreos-charts/stable/
+helm repo add es-operator https://raw.githubusercontent.com/upmc-enterprises/elasticsearch-operator/master/charts/
