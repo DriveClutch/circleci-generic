@@ -2,10 +2,7 @@ FROM buildpack-deps:stretch-scm
 
 RUN apt-get update \
     && apt-get install -y \
-	  openssh-client \
-	  ca-certificates \
 	  tar \
-#	  gzip \
 	  python-pip \
 	  lsb-release \
     && export DOCKER_VERSION=$(curl --silent --fail --retry 3 https://download.docker.com/linux/static/stable/x86_64/ | grep -o -e 'docker-[.0-9]*-ce\.tgz' | sort -r | head -n 1) \
