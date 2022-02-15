@@ -2,11 +2,19 @@ FROM buildpack-deps:stable
 
 RUN apt-get update \
     && apt-get install -y \
-	  tar \
-	  python3-pip \
-	  lsb-release \
-	  shellcheck \
-	  bats
+	     openssh-client \
+		 ca-certificates \
+		 tar \
+		 gzip \
+		 python3-pip \
+         lsb-release \
+         curl \
+         vim \
+         wget \
+         gnupg \
+         jq \
+         shellcheck \
+         bats \
 
 RUN export DOCKER_VERSION=$(curl --silent --fail --retry 3 https://download.docker.com/linux/static/stable/x86_64/ | grep -o -e 'docker-[.0-9]*-ce\.tgz' | sort -r | head -n 1) \
     && DOCKER_URL="https://download.docker.com/linux/static/stable/x86_64/${DOCKER_VERSION}" \
@@ -17,6 +25,9 @@ RUN export DOCKER_VERSION=$(curl --silent --fail --retry 3 https://download.dock
     && mv /tmp/docker/* /usr/bin \
     && rm -rf /tmp/docker /tmp/docker.tgz
 
+RUN pip install pipenv
 RUN pip install --upgrade awscli
+
+RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
 
 COPY tools/* /tools/
